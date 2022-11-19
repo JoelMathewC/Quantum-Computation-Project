@@ -17,6 +17,8 @@ Time Complexity: O(3^n) where n is number of vertices
 
 *Note: The BFS approach in GFG is wrong since it does not actually colour the graph using the minimum number of colours. And hence will give NOT colourable even for cases when it is colourable. The BFS approach is a case of Greedy Colouring*
 
+There are other similar greedy approaches like the Welsh-Powell algorithm which is an iterative greedy approach. The same issue can be expected here as well. 
+
 ### Small footnote
 Words from the author of a 3-coluring-problem medium article
 

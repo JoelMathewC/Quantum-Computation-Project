@@ -16,4 +16,6 @@ A recursive approach can be adopted to find the maximal clique number but this c
 |2|[Greedy Approach](https://iq.opengenus.org/greedy-approach-to-find-single-maximal-clique/) | 
 |3|[Recursive Approach](https://www.geeksforgeeks.org/maximal-clique-problem-recursive-solution/) | 
 
+## Maximum Clique vs Maximum Clique Decision Problem
+In Maximum clique decision problem, given a k value we have to find if there is a clique with the number of nodes greater than k. This is an NP-complete problem. In the case of maximum clique problem, we just find the number of nodes in the largest clique possible in the graph.
 
