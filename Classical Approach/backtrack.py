@@ -1,3 +1,5 @@
+import time
+
 class Node():
     def __init__(self,label):
         self.label = label
@@ -120,10 +122,9 @@ def graph_colouring_backtracking(graph,colour_arr,colour_count,node_index):
 if __name__ == "__main__":
 
     # Adjacency Matrix
-    graph_adj_matrix = [[0,1,0,1],
-                        [1,0,1,0],
-                        [0,1,0,1],
-                        [1,0,1,0]]
+    graph_adj_matrix = [[0,1,1],
+                        [1,0,1],
+                        [1,1,0]]
     
     # Initialize graph object
     g = Graph()
@@ -135,16 +136,18 @@ if __name__ == "__main__":
     # Our case considers 3 colourable
     colour_count = 3
 
+    start = time.time()
     # Running the backtracking algorithm
     isColourable = graph_colouring_backtracking(g, colour_arr=colour_arr, colour_count=colour_count, node_index=0)
+    end = time.time()
 
     # Printing result
     if isColourable:
-        print("This graph is 3-colourable")
+        print("This graph is 3-colourable. TIME TAKEN: {}".format(end-start))
         g.load_node_colours(colour_arr)
         g.print_graph_w_colours()
     else:
-        print("This graph is NOT 3-colourable")
+        print("This graph is NOT 3-colourable. TIME TAKEN: {}".format(end-start))
 
 
 
