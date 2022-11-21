@@ -122,9 +122,11 @@ def graph_colouring_backtracking(graph,colour_arr,colour_count,node_index):
 if __name__ == "__main__":
 
     # Adjacency Matrix
-    graph_adj_matrix = [[0,1,1],
-                        [1,0,1],
-                        [1,1,0]]
+    graph_adj_matrix = [[0, 1, 0, 1, 1],
+                        [1, 0, 1, 1, 0],
+                        [0, 1, 0, 1, 0],
+                        [1, 1, 1, 0, 0],
+                        [1, 0, 0, 0, 0]]
     
     # Initialize graph object
     g = Graph()

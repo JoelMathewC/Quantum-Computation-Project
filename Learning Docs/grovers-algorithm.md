@@ -1,6 +1,6 @@
 # Grover's Algorithm
 
-Improves unstructured database search from O(N) to O(root(N)). A quadratic speedup.
+Improves unstructured database search from O(N) to O(root(N)). A quadratic speedup. A nice article can be found [here](https://qiskit.org/textbook/ch-algorithms/grover.html)
 
 ## Prerequisites
 ### Oracle Function
