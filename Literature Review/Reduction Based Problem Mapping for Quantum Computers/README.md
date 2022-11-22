@@ -1,4 +1,4 @@
-# Reduction-Based_Problem_Mapping_for_Quantum_Computing
+# Reduction-Based Problem Mapping for Quantum Computing
 
 An end-to-end framework for mapping computationally hard problems on a quantum computer via reduction.
 
@@ -119,3 +119,17 @@ Multiple-Control Toffoli gate (MCT) can be used to AND together mulitiple variab
 ![diffusion operator formula](images/diffusion%20op%20formula.png)
 
 *refer the paper for more info about the above formula*
+
+## 💻 Implementation
+
+Was implemented using Qiskit with the following modules:
+
+1. A SAT Quantum Circuit Generator
+2. A problem parser
+3. A back-end quantum processor provided by Qiskit
+
+## 🧪 Evaluation
+
+Several examples were used to demonstrate the usage of the framework. eg. SAT problem and 3-Coloring Problem.
+
+*Please refer the paper to view the code and circuit generated for each.*
