@@ -103,7 +103,7 @@ def generate_oracle(quantumCircuit,qr,inter_ar,final_ar,out,sat_repr,variables):
     clean_ancilla_for_acc_and(quantumCircuit,inter_ar,final_ar)
 
     # Cleaning up inter ancillae bits
-    for i in range(len(sat_repr)):
+    for i in reversed(range(len(sat_repr))):
         clean_ancilla_for_clause(sat_repr[i],quantumCircuit,qr,inter_ar[i],variables_to_qr_map)
 
 def generate_diffuser_circuit(quantumCircuit,qr,acc_ar,cr,out,variables):
@@ -137,7 +137,13 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
 
     # Number of iterations
     # TODO: Add the M factor
-    num_iter = 2 ** int((len(variables)+1)/2)
+    # num_iter = 2 ** int((len(variables)+1)/2)
+    # Setting it to max 3, for faster execution
+    num_iter = 0
+    if len(variables)/num_colour == 1:
+        num_iter = 1
+    else:
+        num_iter = 3
 
     # Number of and gates required for intermediate ands
     num_inter_ancilla_bits = len(sat_repr)
@@ -154,8 +160,6 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
     cr = ClassicalRegister(num_qubits)
     quantumCircuit = QuantumCircuit(qr,out,inter_ar,acc_ar,cr)
 
-    # Hardcoding for testing
-    num_iter = 1
     for i in range(num_iter):
         generate_oracle(quantumCircuit,qr,inter_ar,acc_ar,out,sat_repr,variables)
         generate_diffuser_circuit(quantumCircuit,qr,acc_ar,cr,out,variables)
@@ -165,5 +169,7 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
         quantumCircuit.measure(qr[i],cr[i])
 
     # Saving circuit png
-    quantumCircuit.draw(output='mpl').savefig('output/sat-solving-circuit.png') # find a way to extend horizontally
+    if len(variables) < 9:
+        quantumCircuit.draw(output='mpl').savefig('output/sat-solving-circuit-{}Nodes.png'.format(len(variables)/num_colour))
+        
     return quantumCircuit

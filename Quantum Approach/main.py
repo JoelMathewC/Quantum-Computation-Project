@@ -8,7 +8,17 @@ if __name__ == "__main__":
     start_time = time.time()
 
     # Adjacency Matrix
-    graph_adj_matrix = [[0]]
+    '''
+        (N=1)   graph_adj_matrix = [[0]]
+        (N=2)   graph_adj_matrix = [[0,1],
+                                    [1,0]]
+        (N=3)   graph_adj_matrix = [[0,1,1],
+                                    [1,0,1],
+                                    [1,1,0]]
+    '''
+    graph_adj_matrix = [[0,1,1],
+                        [1,0,1],
+                        [1,1,0]]
 
     # Number of colours
     num_colour = 3
@@ -19,10 +29,10 @@ if __name__ == "__main__":
 
     # SAT represnetation for the graph
     sat_repr = g.graph_to_sat()
-    print("\n")
-    print("SAT REPR")
-    print(sat_repr)
-    print("\n")
+    # print("\n")
+    # print("SAT REPR")
+    # print(sat_repr)
+    # print("\n")
 
     # List of all variables in SAT
     variables = []
