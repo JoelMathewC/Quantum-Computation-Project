@@ -16,9 +16,10 @@ if __name__ == "__main__":
                                     [1,0,1],
                                     [1,1,0]]
     '''
-    graph_adj_matrix = [[0,1,1],
-                        [1,0,1],
-                        [1,1,0]]
+    graph_adj_matrix = [[0,1,0,1],
+                        [1,0,1,0],
+                        [0,1,0,1],
+                        [1,0,1,0]]
 
     # Number of colours
     num_colour = 3
@@ -50,5 +51,5 @@ if __name__ == "__main__":
     result = execute(quantumCircuit,backend=simulator).result()
 
     print(result.get_counts(quantumCircuit))
-    plot_histogram(result.get_counts(quantumCircuit),filename="output/circuit-output.jpg")
+    plot_histogram(result.get_counts(quantumCircuit),filename="output/circuit-output-{}Nodes.jpg".format(len(variables)/num_colour))
     print("Time takes for execution: {} sec".format(time.time() - start_time))

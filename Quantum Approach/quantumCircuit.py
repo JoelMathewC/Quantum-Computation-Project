@@ -9,27 +9,9 @@ def not_and_3_elem(qc,qr1,qr2,qr3,ar):
     qc.x(qr1)
     qc.x(qr2)
     qc.x(qr3)
-    
-
-# def reverse_not_and_3_elem(qc,qr1,qr2,qr3,ar):
-
-#     qc.x(ar)
-#     qc.x(qr1)
-#     qc.x(qr2)
-#     qc.x(qr3)
-#     qc.mct([qr1,qr2,qr3],ar)
-#     qc.x(qr1)
-#     qc.x(qr2)
-#     qc.x(qr3)
 
 def not_of_and_result(qc,qr1,qr2,ar):
     qc.mct([qr1,qr2],ar)
-    
-
-# def reverse_not_of_and_result(qc,qr1,qr2,ar):
-    
-#     qc.x(ar)
-#     qc.mct([qr1,qr2],ar)
 
 def add_circuit_for_clause(clause,qc,qr,inter_ar,variables_to_qr_map):
     
@@ -171,5 +153,5 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
     # Saving circuit png
     if len(variables) < 9:
         quantumCircuit.draw(output='mpl').savefig('output/sat-solving-circuit-{}Nodes.png'.format(len(variables)/num_colour))
-        
+
     return quantumCircuit
