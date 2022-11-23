@@ -16,13 +16,10 @@ challenges in this field is the lack of systematic documentation and
 comprehensive code structuring, we have clearly documented our learning process. 
 
 ```console
-│   .gitignore
 │   README.md
 │
 ├───assets
 │       team-1.jpg
-│       team-2.jpg
-│       team-3.jpeg
 │
 ├───Classical Approach
 │       backtrack.py
@@ -108,10 +105,7 @@ comprehensive code structuring, we have clearly documented our learning process.
     │       circuit-output-2.jpg
     │       circuit-output.jpg
     │       sat-solving-circuit.png
-    │
-    └───__pycache__
-            graph.cpython-310.pyc
-            quantumCircuit.cpython-310.pyc
+
 ```
 
 ## Team members
