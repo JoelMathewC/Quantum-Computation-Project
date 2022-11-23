@@ -8,9 +8,10 @@ if __name__ == "__main__":
     start_time = time.time()
 
     # Adjacency Matrix
-    graph_adj_matrix = [[0,1,1],
-                        [1,0,1],
-                        [1,1,0]]
+    graph_adj_matrix = [[0]]
+
+    # Number of colours
+    num_colour = 3
     
     # Initialize graph object
     g = Graph()
@@ -18,14 +19,18 @@ if __name__ == "__main__":
 
     # SAT represnetation for the graph
     sat_repr = g.graph_to_sat()
+    print("\n")
+    print("SAT REPR")
     print(sat_repr)
+    print("\n")
 
-    # List of all variables in SAT (Hardcoded to solve 3-colour problem)
-    variables = ["N1C{}".format(i) for i in range(1,4)]
-    variables = variables + ["N2C{}".format(i) for i in range(1,4)]
-    variables = variables + ["N3C{}".format(i) for i in range(1,4)]
+    # List of all variables in SAT
+    variables = []
+    for i in range(len(graph_adj_matrix)):
+        for j in range(num_colour):
+            variables.append("N{}C{}".format(i+1,j+1))
 
-    quantumCircuit = generate_quantum_circuit_for_sat(sat_repr,variables)
+    quantumCircuit = generate_quantum_circuit_for_sat(sat_repr,variables,num_colour)
     print("Log: Circuit Creation Completed")
 
     # Quantum assembly simulator

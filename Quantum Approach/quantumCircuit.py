@@ -1,7 +1,7 @@
 from qiskit import *
+import math
 
 def not_and_3_elem(qc,qr1,qr2,qr3,ar):
-
     qc.x(qr1)
     qc.x(qr2)
     qc.x(qr3)
@@ -9,28 +9,27 @@ def not_and_3_elem(qc,qr1,qr2,qr3,ar):
     qc.x(qr1)
     qc.x(qr2)
     qc.x(qr3)
-    qc.x(ar)
+    
 
-def reverse_not_and_3_elem(qc,qr1,qr2,qr3,ar):
+# def reverse_not_and_3_elem(qc,qr1,qr2,qr3,ar):
 
-    qc.x(ar)
-    qc.x(qr1)
-    qc.x(qr2)
-    qc.x(qr3)
-    qc.mct([qr1,qr2,qr3],ar)
-    qc.x(qr1)
-    qc.x(qr2)
-    qc.x(qr3)
+#     qc.x(ar)
+#     qc.x(qr1)
+#     qc.x(qr2)
+#     qc.x(qr3)
+#     qc.mct([qr1,qr2,qr3],ar)
+#     qc.x(qr1)
+#     qc.x(qr2)
+#     qc.x(qr3)
 
 def not_of_and_result(qc,qr1,qr2,ar):
-
     qc.mct([qr1,qr2],ar)
-    qc.x(ar)
-
-def reverse_not_of_and_result(qc,qr1,qr2,ar):
     
-    qc.x(ar)
-    qc.mct([qr1,qr2],ar)
+
+# def reverse_not_of_and_result(qc,qr1,qr2,ar):
+    
+#     qc.x(ar)
+#     qc.mct([qr1,qr2],ar)
 
 def add_circuit_for_clause(clause,qc,qr,inter_ar,variables_to_qr_map):
     
@@ -47,28 +46,32 @@ def add_circuit_for_clause(clause,qc,qr,inter_ar,variables_to_qr_map):
 def clean_ancilla_for_clause(clause,qc,qr,inter_ar,variables_to_qr_map):
     
     if len(clause) == 3:
-        reverse_not_and_3_elem(qc,qr[variables_to_qr_map[clause[0][1:]]],
+        not_and_3_elem(qc,qr[variables_to_qr_map[clause[0][1:]]],
                         qr[variables_to_qr_map[clause[1][1:]]],
                         qr[variables_to_qr_map[clause[2][1:]]],
                         inter_ar)
     else:
-        reverse_not_of_and_result(qc,qr[variables_to_qr_map[clause[0]]],
+        not_of_and_result(qc,qr[variables_to_qr_map[clause[0]]],
                                 qr[variables_to_qr_map[clause[1]]],
                                 inter_ar)
 
 def add_circuit_for_acc_and(qc,inter_ar,final_ar,out):
 
+    final_ar_index = 0
     qc.mct([inter_ar[1],inter_ar[0]],final_ar[0])
 
-    for i in range(2,len(inter_ar)-1):
-        qc.mct([final_ar[i-2],inter_ar[i]],final_ar[i-1])
+    if len(final_ar) > 1:
+        for i in range(2,len(inter_ar)-1):
+            qc.mct([final_ar[i-2],inter_ar[i]],final_ar[i-1])
+            final_ar_index = i-1
     
-    qc.mct([inter_ar[-1],final_ar[-1]],out)
+    qc.mct([inter_ar[-1],final_ar[final_ar_index]],out)
 
 def clean_ancilla_for_acc_and(qc,inter_ar,final_ar):
 
-    for i in reversed(range(2,len(inter_ar)-1)):
-        qc.mct([final_ar[i-2],inter_ar[i]],final_ar[i-1])
+    if len(final_ar) > 1:
+        for i in reversed(range(2,len(inter_ar)-1)):
+            qc.mct([final_ar[i-2],inter_ar[i]],final_ar[i-1])
     
     qc.mct([inter_ar[1],inter_ar[0]],final_ar[0])
 
@@ -81,6 +84,13 @@ def generate_oracle(quantumCircuit,qr,inter_ar,final_ar,out,sat_repr,variables):
     # Superposition
     for i in range(len(variables)):
         quantumCircuit.h(qr[i])
+    
+    for i in range(len(inter_ar)):
+        quantumCircuit.x(inter_ar[i])
+    
+    # out register init
+    # quantumCircuit.x(out)
+    # quantumCircuit.h(out)
 
     # Intermediate results
     for i in range(len(sat_repr)):
@@ -120,12 +130,13 @@ def generate_diffuser_circuit(quantumCircuit,qr,acc_ar,cr,out,variables):
         quantumCircuit.h(qr[i])
         
 
-def generate_quantum_circuit_for_sat(sat_repr,variables):
+def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
 
     # Number of qubits required
     num_qubits = len(variables)
 
     # Number of iterations
+    # TODO: Add the M factor
     num_iter = 2 ** int((len(variables)+1)/2)
 
     # Number of and gates required for intermediate ands
@@ -138,12 +149,13 @@ def generate_quantum_circuit_for_sat(sat_repr,variables):
     # Defining quantum circuit parameters
     qr = QuantumRegister(num_qubits)
     out = QuantumRegister(1)
-    inter_ar = AncillaRegister(num_inter_ancilla_bits)
-    acc_ar = AncillaRegister(num_acc_ancilla_bits)
+    inter_ar = QuantumRegister(num_inter_ancilla_bits)
+    acc_ar = QuantumRegister(num_acc_ancilla_bits)
     cr = ClassicalRegister(num_qubits)
     quantumCircuit = QuantumCircuit(qr,out,inter_ar,acc_ar,cr)
 
-    num_iter = 9
+    # Hardcoding for testing
+    num_iter = 1
     for i in range(num_iter):
         generate_oracle(quantumCircuit,qr,inter_ar,acc_ar,out,sat_repr,variables)
         generate_diffuser_circuit(quantumCircuit,qr,acc_ar,cr,out,variables)
@@ -153,5 +165,5 @@ def generate_quantum_circuit_for_sat(sat_repr,variables):
         quantumCircuit.measure(qr[i],cr[i])
 
     # Saving circuit png
-    # quantumCircuit.draw(output='mpl').savefig('output/sat-solving-circuit.png') # find a way to extend horizontally
+    quantumCircuit.draw(output='mpl').savefig('output/sat-solving-circuit.png') # find a way to extend horizontally
     return quantumCircuit
