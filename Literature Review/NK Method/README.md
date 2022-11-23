@@ -1,0 +1,1 @@
+# Quantum K-colouring with NK method
