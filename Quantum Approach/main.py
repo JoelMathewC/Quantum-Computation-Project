@@ -71,9 +71,10 @@ if __name__ == "__main__":
                                     [1,0,1],
                                     [1,1,0]]
     '''
-    graph_adj_matrix = [[0,1,1],
-                        [1,0,1],
-                        [1,1,0]]
+    graph_adj_matrix = [[0,1,0,1],
+                        [1,0,1,0],
+                        [0,1,0,1],
+                        [1,0,1,0]]
 
     # Number of colours
     num_colour = 3
