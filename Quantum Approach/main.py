@@ -71,10 +71,8 @@ if __name__ == "__main__":
                                     [1,0,1],
                                     [1,1,0]]
     '''
-    graph_adj_matrix = [[0,1,0,1],
-                        [1,0,1,0],
-                        [0,1,0,1],
-                        [1,0,1,0]]
+    graph_adj_matrix = [[0,1],
+                         [1,0]]
 
     # Number of colours
     num_colour = 3
@@ -98,7 +96,7 @@ if __name__ == "__main__":
 
     quantumCircuit = generate_quantum_circuit_for_sat(sat_repr,variables,num_colour)
     print("Log: Circuit Creation Completed")
-
+    
     # Quantum assembly simulator
     simulator = Aer.get_backend('aer_simulator_matrix_product_state')
 

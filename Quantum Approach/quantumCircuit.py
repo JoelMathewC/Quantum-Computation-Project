@@ -152,6 +152,6 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
 
     # Saving circuit png
     if len(variables) < 9:
-        quantumCircuit.draw(output='mpl',fold=-1).savefig('output/sat-solving-circuit-{}Nodes.png'.format(len(variables)/num_colour))
+        quantumCircuit.draw(output='mpl',fold=40).savefig('output/sat-solving-circuit-{}Nodes-1.png'.format(len(variables)/num_colour))
 
     return quantumCircuit
