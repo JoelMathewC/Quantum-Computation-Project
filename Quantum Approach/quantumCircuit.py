@@ -148,10 +148,15 @@ def generate_quantum_circuit_for_sat(sat_repr,variables,num_colour):
     
     # Measuring the outcome
     for i in range(len(variables)):
-        quantumCircuit.measure(qr[i],cr[i])
+        quantumCircuit.measure(qr[i],cr[i])        
 
+    return quantumCircuit, variables
+
+def draw_quantum_circuit(quantumCircuit, variables, num_colour = 3): 
     # Saving circuit png
     if len(variables) < 9:
-        quantumCircuit.draw(output='mpl',fold=40).savefig('output/sat-solving-circuit-{}Nodes-1.png'.format(len(variables)/num_colour))
-
-    return quantumCircuit
+        file_path = 'output/circuits/sat-solving-circuit-{}-Nodes.png'.format(int(len(variables)/num_colour))
+        quantumCircuit.draw(output='mpl',fold=40, filename = file_path)
+        return file_path
+    else:
+        return None

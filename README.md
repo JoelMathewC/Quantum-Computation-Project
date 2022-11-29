@@ -15,6 +15,8 @@ This repository documents our trials and tribulations in solving the given probl
 challenges in this field is the lack of systematic documentation and
 comprehensive code structuring, we have clearly documented our learning process. 
 
+## Code
+To view the details regarding the quantum approach to solve the 3-colouring graph problem, proceed to [Quantum Approach](https://github.com/JoelMathewC/Quantum-Computation-Project/tree/main/Quantum%20Approach) directory.
 ```console
 │   README.md
 │
@@ -26,7 +28,9 @@ comprehensive code structuring, we have clearly documented our learning process.
 │       README.md
 │
 ├───Deliverables
-│       Intro-Presentation.pdf
+│       Group04_Phase1_Abstract_Presentation.pdf
+│       Group04_Phase2_Presentation.pdf
+│       Group04_Phase3_Final_Report.pdf
 │       README.md
 │
 ├───Learning Docs
@@ -57,7 +61,7 @@ comprehensive code structuring, we have clearly documented our learning process.
 │
 ├───Literature Review
 │   │   README.md
-│   │   
+│   │
 │   ├───Chromatic Number Problem Approach
 │   │       Exponential Time Quantum Algorithms for Graph Coloring.pdf
 │   │       README.md
@@ -77,7 +81,7 @@ comprehensive code structuring, we have clearly documented our learning process.
 │       │   README.md
 │       │   Reduction-Based_Problem_Mapping_for_Quantum_Computing.pdf
 │       │   summary.md
-│       │   
+│       │
 │       └───images
 │               diff op An.png
 │               diffusion op formula.png
@@ -91,21 +95,58 @@ comprehensive code structuring, we have clearly documented our learning process.
 │               Mn.png
 │
 └───Quantum Approach
+    │   Design.drawio
     │   graph.py
     │   main.py
+    │   plot.py
     │   qiskit-backends.py
     │   quantumCircuit.py
     │   README.md
-    │   
+    │   requirements.txt
+    │
+    ├───input
+    │       nodes-1.csv
+    │       nodes-2.csv
+    │       nodes-3.csv
+    │
     ├───logs
-    │       terminal.txt
+    │       Sample.md
     │
     ├───output
-    │       circuit-output-1.jpg
-    │       circuit-output-2.jpg
-    │       circuit-output.jpg
-    │       sat-solving-circuit.png
-
+    │   ├───circuits
+    │   │       sat-solving-circuit-1-Nodes.png
+    │   │       sat-solving-circuit-2-Nodes.png
+    │   │
+    │   ├───graphs
+    │   │   ├───1-nodes
+    │   │   │       coloured1.png
+    │   │   │       coloured2.png
+    │   │   │       coloured3.png
+    │   │   │       uncoloured.png
+    │   │   │
+    │   │   ├───2-nodes
+    │   │   │       coloured1.png
+    │   │   │       coloured2.png
+    │   │   │       coloured3.png
+    │   │   │       coloured4.png
+    │   │   │       coloured5.png
+    │   │   │       coloured6.png
+    │   │   │       uncoloured.png
+    │   │   │
+    │   │   └───3-nodes
+    │   │           coloured1.png
+    │   │           coloured2.png
+    │   │           coloured3.png
+    │   │           coloured4.png
+    │   │           coloured5.png
+    │   │           coloured6.png
+    │   │           uncoloured.png
+    │   │
+    │   └───histograms
+    │           1-nodes.png
+    │           2-nodes.png
+    │           3-nodes.png
+    │
 ```
 
 ## Team members
